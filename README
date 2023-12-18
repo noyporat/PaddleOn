@@ -1,0 +1,33 @@
+PADDLE ON
+
+Goals:
+* Creating a fun game that motivates leg movement
+* Encouraging children with one weak leg to use it more while paddling
+* Giving instant and clear feedback for the degree of pressure while paddling
+
+Our Project:
+A set of bicycle that has an Arduino kit, pressure sensors and joystick built on it.
+The pressure sensors are attached to the paddles to inform how much the child uses the weaker leg relatively
+to the other leg.
+The sensors data is used in a live car simulation, created in Unity. The goal is to paddle until the number of laps
+(given as input to the game) is down to zero.
+Using high pass and low pass filters (with Matlab) on the signals from the sensors, the game recognizes continuous
+paddling with reasonable pressure (which creates the car movement), and recognizes stopping or a long press of the
+weaker leg (which stops the car)
+To make the design more child-friendly, we used Rhino and 3D-printing to print a joystick holder in the shape of a car
+similar to the one in the game.
+
+Project Files:
+1. "PaddlingRecognition-Arduino" directory contains the INO (Arduino) file that converts analog data from the sensors
+to raw data that can be used in the game. Using filters created in Matlab, the signal can be classified as labels that
+will descibe the current state in the game.
+
+2. "Top-Down-2D-Car-Controller-Unity" directory conatins the car simulation:
+- CarInputHandler.cs - handles the input after being classified as game state lables. The vertical and horizontal
+movement and speed will change based on that input.
+- "MenuSceneScript.cs", "EndImage.cs"- handle the scenes in the game, menu that gets as input the number of laps,
+the game scene and an end scene (image) when the children finishes successfully.
+- "CarLapCounter.cs", "LapCounterText.cs"- handle the counter of laps, and substract 1 everytime the car crosses the
+finish line.
+- "TopDownCarController.cs"- handles and calculates the car's speed, acceleration and rotation angles.
+
